@@ -103,7 +103,7 @@ resource "aws_ecs_task_definition" "task_def" {
   }
 
   dynamic "ephemeral_storage" {
-    for_each = var.ephemeral_storage_size != "" ? [var.ephemeral_storage_size] : null
+    for_each = var.ephemeral_storage_size != "" ? [var.ephemeral_storage_size] : []
     content {
       size_in_gib = ephemeral_storage.value
     }
