@@ -102,6 +102,13 @@ resource "aws_ecs_task_definition" "task_def" {
     create_before_destroy = true
   }
 
+  dynamic "ephemeral_storage" {
+    for_each = var.ephemeral_storage_size != "" ? [var.ephemeral_storage_size] : null
+    content {
+      size_in_gib = ephemeral_storage.value
+    }
+  }
+
   dynamic "volume" {
     for_each = var.volumes
     content {
